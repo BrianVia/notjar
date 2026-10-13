@@ -1,0 +1,22 @@
+{
+  "name": "notjar",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Self-hosted session replay on Cloudflare Workers + D1 + R2 (rrweb under the hood)",
+  "type": "module",
+  "scripts": {
+    "postinstall": "./vendor.sh",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit",
+    "db:init": "wrangler d1 execute notjar --remote --file=schema.sql",
+    "db:init:local": "wrangler d1 execute notjar --local --file=schema.sql"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20251001.0",
+    "@rrweb/record": "2.1.7",
+    "rrweb-player": "2.1.7",
+    "typescript": "^5.9.0",
+    "wrangler": "^4.149.0"
+  }
+}

@@ -1,0 +1,29 @@
+name = "notjar"
+main = "src/index.ts"
+compatibility_date = "2026-09-01"
+
+# Browser-side code and vendored rrweb bundles are imported as plain strings.
+[[rules]]
+type = "Text"
+globs = ["**/*.client.js", "**/*.txt"]
+fallthrough = true
+
+[vars]
+# Comma-separated list of origins allowed to send recordings, e.g. "https://meals.brianvia.com,https://brianvia.com".
+# Empty = accept from anywhere (fine for testing, tighten before you forget).
+ALLOWED_ORIGINS = ""
+RETENTION_DAYS = "30"
+DASH_USER = "admin"
+# Secret: wrangler secret put DASH_PASSWORD
+
+[[d1_databases]]
+binding = "DB"
+database_name = "notjar"
+database_id = "REPLACE_WITH_ID_FROM_wrangler_d1_create"
+
+[[r2_buckets]]
+binding = "BUCKET"
+bucket_name = "notjar-recordings"
+
+[triggers]
+crons = ["17 4 * * *"]
